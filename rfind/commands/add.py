@@ -17,13 +17,12 @@ class Add(Command):
             else:
                 self.command = self.cleanup_input(args.add, args.num)
 
-
-    def cleanup_input(self, inputs: io.TextIOWrapper, rownum: int=None) -> str:
+    def cleanup_input(self, inputs: io.TextIOWrapper, rownum: int = None) -> str:
         lines = [s.lstrip(' ').lstrip('0123456789').strip() for s in inputs.readlines()]
 
         if len(lines) == 0:
             raise Exception("There's no valid lines in input")
-        
+
         if rownum is None:
             return lines[max(len(lines)-2, 0)]  # get a last line except "history" command itself
 
@@ -31,7 +30,6 @@ class Add(Command):
             return lines[rownum-1]  # get a specified line
 
         raise Exception(f"Invalid rownum is specified. rownum={rownum}")
-
 
     def run_command(self, command: str) -> None:
         args = command.split(' ')
@@ -42,7 +40,6 @@ class Add(Command):
             raise Exception(f'command failed. code={r}')
 
         print(r)
-
 
     def run(self) -> None:
         try:

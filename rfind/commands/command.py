@@ -9,7 +9,6 @@ class Command():
     def __init__(self, args=None):
         self.args = args
 
-
     def call_server(self, payload=None):
         r = requests.post(config.URL, data=json.dumps(payload), headers=config.HEADERS)
 

@@ -8,7 +8,6 @@ class Run(Command):
     def __init__(self, args):
         self.num: int = args.run
 
-
     def run_command(self, command: str) -> None:
         args = command.split(' ')
 
@@ -19,11 +18,8 @@ class Run(Command):
 
         print(r)
 
-
     def run(self) -> None:
         payload = {'instruction': 'get', 'body': self.num}
         r = self.call_server(payload)
 
         self.run_command(r.text)
-
-

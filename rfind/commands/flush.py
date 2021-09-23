@@ -1,5 +1,6 @@
 from .command import Command
 
+
 class Flush(Command):
 
     def run(self) -> None:
