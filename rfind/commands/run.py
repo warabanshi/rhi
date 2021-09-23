@@ -11,12 +11,10 @@ class Run(Command):
     def run_command(self, command: str) -> None:
         args = command.split(' ')
 
-        r = subprocess.run(args, capture_output=True)
+        r = subprocess.run(args)
 
         if r.returncode != 0:
             raise Exception(f'command failed. code={r}')
-
-        print(r)
 
     def run(self) -> None:
         payload = {'instruction': 'get', 'body': self.num}

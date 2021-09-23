@@ -9,3 +9,5 @@ class Flush(Command):
         if yn.upper() == 'Y':
             payload = {'instruction': 'flush'}
             self.call_server(payload)
+        else:
+            print('Flush cancelled')
