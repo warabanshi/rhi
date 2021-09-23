@@ -10,5 +10,8 @@ class GetAll(Command):
         r = self.call_server(payload)
 
         results = json.loads(r.text)
-        for i in range(len(results)):
-            print(f"{i+1}: {results[i]}")
+        length = len(results)
+        digits = len(str(length))
+
+        for i in range(length):
+            print(f" {i+1:{digits}}: {results[i]}")
