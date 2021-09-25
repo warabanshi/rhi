@@ -4,6 +4,7 @@ import sys
 from commands.add import Add
 from commands.flush import Flush
 from commands.run import Run
+from commands.get import Get
 from commands.get_all import GetAll
 
 

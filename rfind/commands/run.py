@@ -9,9 +9,7 @@ class Run(Command):
         self.num: int = args.run
 
     def invoke_command(self, command: str) -> None:
-        args = command.split(' ')
-
-        r = subprocess.run(args)
+        r = subprocess.run(command, shell=True)
 
         if r.returncode != 0:
             raise Exception(f'command failed. code={r}')
