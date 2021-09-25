@@ -1,4 +1,4 @@
-from rfind import __version__
+from rhi import __version__
 
 
 def test_version():

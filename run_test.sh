@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo '###### mypy ######'
-poetry run mypy rfind/
+poetry run mypy rhi/
 
 if [ $? != 0 ]; then
     echo 'mypy failed'
@@ -9,7 +9,7 @@ if [ $? != 0 ]; then
 fi
 
 echo '###### flake8 ######'
-poetry run flake8 rfind/
+poetry run flake8 rhi/
 
 if [ $? != 0 ]; then
     echo 'flake8 failed'
