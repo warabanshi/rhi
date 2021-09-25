@@ -17,7 +17,7 @@ class Run(Command):
             raise Exception(f'command failed. code={r}')
 
     def invoke(self) -> None:
-        payload = {'instruction': 'get', 'body': self.num}
-        r = self.call_server(payload)
+        r = self.call_get(operation=f'/get/{self.num}')
+        cmd = r.json().get('result')
 
-        self.invoke_command(r.text)
+        self.invoke_command(cmd)

@@ -11,9 +11,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-a', '--add', nargs='?', const=sys.stdin, help='add a command')
     parser.add_argument('-m', '--memo', type=str, help='add memo for the command')
-    parser.add_argument('-n', '--num', type=int, default=None, help='history number')
     parser.add_argument('-f', '--flush', help='flush registered data', action='store_true')
     parser.add_argument('-r', '--run', type=int, help='run a specified command')
+    parser.add_argument(
+        '-n', '--num', type=int, default=None,
+        help='history number (adopted for add or get instructions'
+    )
 
     args = parser.parse_args()
 
@@ -24,6 +27,8 @@ def main():
             cmd = Flush()
         elif args.run:
             cmd = Run(args)
+        elif args.num:
+            cmd = Get(args)
         else:
             cmd = GetAll()
 
