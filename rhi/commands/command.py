@@ -9,12 +9,11 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 
-class Command():
-
+class Command:
     def __init__(self, args=None):
         self.args = args
 
-    def call_get(self, operation='') -> requests.Response:
+    def call_get(self, operation="") -> requests.Response:
         path = config.URL + operation
         r = requests.get(path, headers=config.HEADERS)
 
@@ -24,7 +23,9 @@ class Command():
 
         return r
 
-    def call_post(self, operation='', payload=None, method=requests.post) -> requests.Response:
+    def call_post(
+        self, operation="", payload=None, method=requests.post
+    ) -> requests.Response:
         path = config.URL + operation
 
         r = method(path, data=json.dumps(payload), headers=config.HEADERS)

@@ -55,3 +55,12 @@ Flush all saved commands
 ```
 $ rhi -f
 ```
+
+## Run tests
+
+`run_test.sh` file runs `mypy`, `flake8` and `pytest`. These expect it will be run under poetry venv.
+
+```
+$ . .venv/bin/activate
+(.venv) $ ./run_test.sh
+```

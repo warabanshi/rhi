@@ -25,3 +25,6 @@ if [ $? != 0 ]; then
     echo 'pytest failed'
     exit 1
 fi
+
+echo '###### black #####'
+poetry run black rhi/
