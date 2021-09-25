@@ -8,7 +8,7 @@ class Run(Command):
     def __init__(self, args):
         self.num: int = args.run
 
-    def run_command(self, command: str) -> None:
+    def invoke_command(self, command: str) -> None:
         args = command.split(' ')
 
         r = subprocess.run(args)
@@ -16,8 +16,8 @@ class Run(Command):
         if r.returncode != 0:
             raise Exception(f'command failed. code={r}')
 
-    def run(self) -> None:
+    def invoke(self) -> None:
         payload = {'instruction': 'get', 'body': self.num}
         r = self.call_server(payload)
 
-        self.run_command(r.text)
+        self.invoke_command(r.text)

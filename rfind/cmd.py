@@ -27,7 +27,7 @@ def main():
         else:
             cmd = GetAll()
 
-        cmd.run()
+        cmd.invoke()
     except Exception as e:
         print(f'Exception occurred. message = {e}')
 

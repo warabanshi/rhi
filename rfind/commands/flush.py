@@ -3,11 +3,12 @@ from .command import Command
 
 class Flush(Command):
 
-    def run(self) -> None:
+    def invoke(self) -> None:
         yn = input('Flush all commands? (y/n) >> ')
 
         if yn.upper() == 'Y':
-            payload = {'instruction': 'flush'}
-            self.call_server(payload)
+            r = self.call_post(operation='/flush/')
+            msg = r.json().get('result')
+            print(msg)
         else:
             print('Flush cancelled')

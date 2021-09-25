@@ -5,11 +5,10 @@ from .command import Command
 
 class GetAll(Command):
 
-    def run(self) -> None:
-        payload = {'instruction': 'get_all'}
-        r = self.call_server(payload)
+    def invoke(self) -> None:
+        r = self.call_get(operation='/get/')
 
-        results = json.loads(r.text)
+        results = r.json().get('result')
         length = len(results)
         digits = len(str(length))
 
