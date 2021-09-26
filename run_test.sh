@@ -8,6 +8,9 @@ if [ $? != 0 ]; then
     exit 1
 fi
 
+echo '###### black #####'
+poetry run black rhi/
+
 echo '###### flake8 ######'
 poetry run flake8 rhi/
 
@@ -19,12 +22,9 @@ else
 fi
 
 echo '###### pytest ######'
-poetry run pytest
+poetry run pytest -s
 
 if [ $? != 0 ]; then
     echo 'pytest failed'
     exit 1
 fi
-
-echo '###### black #####'
-poetry run black rhi/

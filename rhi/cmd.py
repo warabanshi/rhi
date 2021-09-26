@@ -24,7 +24,7 @@ def main():
         help="history number (adopted for add or get instructions",
     )
 
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     try:
         if args.add:

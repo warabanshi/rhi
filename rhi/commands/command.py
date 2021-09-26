@@ -1,3 +1,4 @@
+import argparse
 import json
 import logging
 import requests
@@ -10,7 +11,7 @@ logger.setLevel(logging.DEBUG)
 
 
 class Command:
-    def __init__(self, args=None):
+    def __init__(self, args: argparse.Namespace = None):
         self.args = args
 
     def call_get(self, operation="") -> requests.Response:
