@@ -1,11 +1,11 @@
 import argparse
 import sys
 
-from commands.add import Add
-from commands.flush import Flush
-from commands.run import Run
-from commands.get import Get
-from commands.get_all import GetAll
+from rhi.commands.add import Add
+from rhi.commands.flush import Flush
+from rhi.commands.run import Run
+from rhi.commands.get import Get
+from rhi.commands.get_all import GetAll
 
 
 def main():

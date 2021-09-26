@@ -2,7 +2,7 @@ import json
 import logging
 import requests
 
-import config
+import rhi.config
 
 
 logger = logging.getLogger(__name__)
@@ -14,8 +14,8 @@ class Command:
         self.args = args
 
     def call_get(self, operation="") -> requests.Response:
-        path = config.URL + operation
-        r = requests.get(path, headers=config.HEADERS)
+        path = rhi.config.URL + operation
+        r = requests.get(path, headers=rhi.config.HEADERS)
 
         logger.debug(f"call {path}")
         logger.debug(f"response code = {r}")
@@ -26,9 +26,9 @@ class Command:
     def call_post(
         self, operation="", payload=None, method=requests.post
     ) -> requests.Response:
-        path = config.URL + operation
+        path = rhi.config.URL + operation
 
-        r = method(path, data=json.dumps(payload), headers=config.HEADERS)
+        r = method(path, data=json.dumps(payload), headers=rhi.config.HEADERS)
 
         logger.debug(f"send payload: {payload}")
         logger.debug(f"response code = {r}")
