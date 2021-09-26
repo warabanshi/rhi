@@ -1,8 +1,12 @@
 [tool.poetry]
 name = "rhi"
-version = "0.1.0"
-description = ""
+version = "0.0.2"
+description = "rhi remote history command"
 authors = ["warabanshi <warabanshi@gmail.com>"]
+homepage = "https://github.com/warabanshi/"
+repository = "https://github.com/warabanshi/rhi"
+documentation = "https://github.com/warabanshi/rhi"
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
