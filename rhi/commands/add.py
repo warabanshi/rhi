@@ -21,7 +21,7 @@ class Add(Command):
     def cleanup_input(self, inputs: io.TextIOWrapper, rownum: int = None) -> str:
         def split_line(line: str) -> List[str]:
             s = line.lstrip()
-            return [s[: s.find(" ")], s[s.find(" ") + 1 :].strip()]
+            return [s[: s.find(" ")].strip("* "), s[s.find(" ") + 1 :].strip()]
 
         lines = [split_line(line) for line in inputs.readlines()]
         histories = {num: command for (num, command) in lines}
