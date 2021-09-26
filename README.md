@@ -1,6 +1,6 @@
 # rhi remote history
 
-`rhi` is a command that saving or retrieving commands to/from remote server.
+`rhi` is a command that saving/retrieving commands to/from remote server.
 
 How do you save commands it's not frequently used but sometime it will be required or it's too long to re-enter it. It is awkward but, as for me, I save it to a memo file and copy & paste it to CLI when I require it. (Let me know if there are other neat things to do)
 
