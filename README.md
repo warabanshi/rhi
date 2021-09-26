@@ -10,7 +10,7 @@ Of course, to search hisotry I use `ctrl + r` also but it depends `history` of t
 
 ## Usage
 
-### Add a command
+### Adding a command
 
 Add a last command of `history` except `history` itself at the tail of the result.
 
@@ -28,7 +28,7 @@ Add a command with message
 $ history | rhi -a -m 'This is sample message'
 ```
 
-### Get saved commands
+### Getting saved commands
 
 Get all saved commands
 
@@ -41,7 +41,7 @@ Get a particular command
 $ rhi -n 10  # get a command row number 10 of saved commands
 ```
 
-### Run a commnad
+### Running a commnad
 
 Run a retrieved command 
 
@@ -49,14 +49,14 @@ Run a retrieved command
 $ rhi -r 15  # run a command row number 15 of saved commands
 ```
 
-### Flush saved commands
+### Flushing saved commands
 
 Flush all saved commands
 ```
 $ rhi -f
 ```
 
-## Run tests
+## Running tests
 
 `run_test.sh` file runs `mypy`, `flake8` and `pytest`. These expect it will be run under poetry venv.
 
