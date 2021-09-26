@@ -58,9 +58,8 @@ $ rhi -f
 
 ## Running tests
 
-`run_test.sh` file runs `mypy`, `flake8` and `pytest`. These expect it will be run under poetry venv.
+`run_test.sh` file runs `mypy`, `flake8` and `pytest`.
 
 ```
-$ . .venv/bin/activate
-(.venv) $ ./run_test.sh
+$ poetry run ./run_test.sh
 ```
