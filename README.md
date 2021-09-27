@@ -10,22 +10,42 @@ Of course, to search hisotry I use `ctrl + r` also but it depends `history` of t
 
 ## Usage
 
-### Adding a command
+`rhi` takes a subcommand like `add`, `run`, `flush` (there's a alias for each subcommand). When any subcommand isn't specified then it's considered `get` command.
+
+### Add command
 
 Add a last command of `history` except `history` itself at the tail of the result.
 
 ```
-$ history | rhi -a
+$ history | rhi add
+$ history | rhi a       # alias version
 ```
 
 Add a numbered history in `history` command
 ```
-$ history | rhi -a -n 10  # add a command row number 10
+$ history | rhi add -n 10  # add a command row number 10
 ```
 
 Add a command with message
 ```
-$ history | rhi -a -m 'This is sample message'
+$ history | rhi add -m 'This is sample message'
+```
+
+### Run commnad
+
+Run a retrieved command 
+
+```
+$ rhi run 15  # run a command row number 15 of saved commands
+$ rhi r 15    # alias version
+```
+
+### Flushing saved commands
+
+Flush all saved commands
+```
+$ rhi flush
+$ rhi f       # alias version
 ```
 
 ### Getting saved commands
@@ -41,25 +61,9 @@ Get a particular command
 $ rhi -n 10  # get a command row number 10 of saved commands
 ```
 
-### Running a commnad
-
-Run a retrieved command 
-
-```
-$ rhi -r 15  # run a command row number 15 of saved commands
-```
-
-### Flushing saved commands
-
-Flush all saved commands
-```
-$ rhi -f
-```
-
 ## Running tests
 
 `run_test.sh` file runs `mypy`, `flake8` and `pytest`.
 
 ```
 $ poetry run ./run_test.sh
-```

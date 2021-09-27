@@ -11,12 +11,13 @@ class Add(Command):
     def __init__(self, args: argparse.Namespace):
         super().__init__(args)
         self.command = None
+        self.message = args.message
 
-        if args.add:
+        if args.history:
             if sys.stdin.isatty():
                 raise Exception("stdin waits input")
             else:
-                self.command = self.cleanup_input(args.add, args.num)
+                self.command = self.cleanup_input(args.history, args.num)
 
     def cleanup_input(self, inputs: io.TextIOWrapper, rownum: int = None) -> str:
         def split_line(line: str) -> List[str]:
@@ -41,7 +42,7 @@ class Add(Command):
         raise Exception(f"Invalid rownum is specified. rownum={rownum}")
 
     def invoke(self) -> None:
-        payload = {"command": self.command}
+        payload = {"command": self.command, 'message': self.message}
         r = self.call_post(operation="/add/", payload=payload)
 
         msg = r.json().get("result")

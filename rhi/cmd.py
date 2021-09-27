@@ -5,38 +5,41 @@ from rhi.commands.add import Add
 from rhi.commands.flush import Flush
 from rhi.commands.run import Run
 from rhi.commands.get import Get
-from rhi.commands.get_all import GetAll
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-a", "--add", nargs="?", const=sys.stdin, help="add a command")
-    parser.add_argument("-m", "--msg", type=str, help="add msg for the command")
-    parser.add_argument(
-        "-f", "--flush", help="flush registered data", action="store_true"
-    )
-    parser.add_argument("-r", "--run", type=int, help="run a specified command")
+    subparsers = parser.add_subparsers()
+
+    add = subparsers.add_parser('add', aliases=['a'], help="add a command from stdin")
+    add.add_argument('history', nargs="?", default=sys.stdin, help="give history via PIPE")
+    add.add_argument('--num', '-n', type=int, default=None, help="history number")
+    add.add_argument('--message', '-m', type=str, default='', help="comment")
+    add.set_defaults(command=Add)
+
+    flush = subparsers.add_parser('flush', aliases=['f'], help="flush all commands")
+    flush.set_defaults(command=Flush)
+
+    run = subparsers.add_parser('run', aliases=['r'], help="run a specifiec command")
+    run.add_argument('number', type=int, default=None, help="desired history number for running")
+    run.set_defaults(command=Run)
+
+    # For get command
     parser.add_argument(
         "-n",
         "--num",
         type=int,
         default=None,
-        help="history number (adopted for add or get instructions",
+        help="get a specified command",
     )
 
     args: argparse.Namespace = parser.parse_args()
 
     try:
-        if args.add:
-            cmd = Add(args)
-        elif args.flush:
-            cmd = Flush()
-        elif args.run:
-            cmd = Run(args)
-        elif args.num:
-            cmd = Get(args)
+        if 'command' in args:
+            cmd = args.command(args)
         else:
-            cmd = GetAll()
+            cmd = Get(args)
 
         cmd.invoke()
     except Exception as e:
