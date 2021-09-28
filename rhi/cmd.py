@@ -11,17 +11,21 @@ def main():
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
 
-    add = subparsers.add_parser('add', aliases=['a'], help="add a command from stdin")
-    add.add_argument('history', nargs="?", default=sys.stdin, help="give history via PIPE")
-    add.add_argument('--num', '-n', type=int, default=None, help="history number")
-    add.add_argument('--message', '-m', type=str, default='', help="comment")
+    add = subparsers.add_parser("add", aliases=["a"], help="add a command from stdin")
+    add.add_argument(
+        "history", nargs="?", default=sys.stdin, help="give history via PIPE"
+    )
+    add.add_argument("--num", "-n", type=int, default=None, help="history number")
+    add.add_argument("--message", "-m", type=str, default="", help="comment")
     add.set_defaults(command=Add)
 
-    flush = subparsers.add_parser('flush', aliases=['f'], help="flush all commands")
+    flush = subparsers.add_parser("flush", aliases=["f"], help="flush all commands")
     flush.set_defaults(command=Flush)
 
-    run = subparsers.add_parser('run', aliases=['r'], help="run a specifiec command")
-    run.add_argument('number', type=int, default=None, help="desired history number for running")
+    run = subparsers.add_parser("run", aliases=["r"], help="run a specifiec command")
+    run.add_argument(
+        "number", type=int, default=None, help="desired history number for running"
+    )
     run.set_defaults(command=Run)
 
     # For get command
@@ -36,7 +40,7 @@ def main():
     args: argparse.Namespace = parser.parse_args()
 
     try:
-        if 'command' in args:
+        if "command" in args:
             cmd = args.command(args)
         else:
             cmd = Get(args)

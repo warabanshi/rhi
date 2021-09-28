@@ -42,7 +42,7 @@ class Add(Command):
         raise Exception(f"Invalid rownum is specified. rownum={rownum}")
 
     def invoke(self) -> None:
-        payload = {"command": self.command, 'message': self.message}
+        payload = {"command": self.command, "message": self.message}
         r = self.call_post(operation="/add/", payload=payload)
 
         msg = r.json().get("result")
