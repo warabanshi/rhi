@@ -10,21 +10,24 @@ input1 = """
   1  ls -lh
   2  cat /tmp/testfile
   3  history
-""".strip()
+""".strip("\n")
 
 input2 = """
  13  ls -lh
  14  cat /etc/SuSE-brand
  15  cd /home/foo
  16  history
-""".strip()
+""".strip("\n")
 
 input3 = """
  13  ls -lh
  14*
  15  cd /home/foo
  16  history
-""".strip()
+""".strip("\n")
+
+line1 = "  10 ls -lh"
+line2 = "This is just a single line input"
 
 
 @patch('rhi.commands.add.Add.__init__')
@@ -104,6 +107,26 @@ def test_cleanup_input_empty_row(mock_add_init):
 
     add = Add()
     result = add.cleanup_input(s)
+
+    assert result == expected
+
+@patch('rhi.commands.add.Add.__init__')
+def test_is_history_true(mock_add_init):
+    mock_add_init.return_value = None
+    expected = True
+
+    add = Add()
+    result = add.is_history(line1)
+
+    assert result == expected
+
+@patch('rhi.commands.add.Add.__init__')
+def test_is_history_false(mock_add_init):
+    mock_add_init.return_value = None
+    expected = False
+
+    add = Add()
+    result = add.is_history(line2)
 
     assert result == expected
 

@@ -13,7 +13,7 @@ def main():
 
     add = subparsers.add_parser("add", aliases=["a"], help="add a command from stdin")
     add.add_argument(
-        "history", nargs="?", default=sys.stdin, help="give history via PIPE"
+        "commands", nargs="?", default=sys.stdin, help="give commands via PIPE"
     )
     add.add_argument("--num", "-n", type=int, default=None, help="history number")
     add.add_argument("--message", "-m", type=str, default="", help="comment")
