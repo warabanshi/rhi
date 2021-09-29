@@ -1,3 +1,7 @@
+import json
+
+from typing import Any, Dict, List
+
 from .command import Command
 
 
@@ -6,23 +10,38 @@ class Get(Command):
         self.num: int = args.num if args.num else 0
 
     def invoke(self) -> None:
-        if self.num > 0:
-            self.get_single()
-        else:
-            self.get_all()
+        output: List[str] = []
 
-    def get_single(self) -> None:
+        if self.num > 0:
+            output = self.get_single()
+        else:
+            output = self.get_all()
+
+        print("\n".join(output))
+
+
+    def parse_line(self, one_command: Dict[str, str]) -> str:
+        if one_command["message"]:
+            return f'{one_command["command"]}   # {one_command["message"]}'
+        else:
+            return f'{one_command["command"]}'
+
+    def get_single(self) -> List[str]:
         r = self.call_get(operation=f"/get/{self.num}")
 
         result = r.json().get("result")
-        print(result)
+        return [self.parse_line(result)]
 
-    def get_all(self) -> None:
+    def get_all(self) -> List[str]:
         r = self.call_get(operation="/get/")
 
         results = r.json().get("result")
         length = len(results)
         digits = len(str(length))
 
+        output: List[str] = [] 
         for i in range(length):
-            print(f" {i+1:{digits}}: {results[i]}")
+            r = self.parse_line(results[i])
+            output.append(f" {i+1:{digits}}: {r}")
+
+        return output
