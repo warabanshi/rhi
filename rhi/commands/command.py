@@ -25,11 +25,24 @@ class Command:
         return r
 
     def call_post(
-        self, operation="", payload=None, method=requests.post
+        self, operation="", payload=None
     ) -> requests.Response:
         path = rhi.config.URL + operation
 
-        r = method(path, data=json.dumps(payload), headers=rhi.config.HEADERS)
+        r = requests.post(path, data=json.dumps(payload), headers=rhi.config.HEADERS)
+
+        logger.debug(f"send payload: {payload}")
+        logger.debug(f"response code = {r}")
+        logger.debug(f"response = {r.text}")
+
+        return r
+
+    def call_delete(
+        self, operation="", payload=None
+    ) -> requests.Response:
+        path = rhi.config.URL + operation
+
+        r = requests.delete(path, data=json.dumps(payload), headers=rhi.config.HEADERS)
 
         logger.debug(f"send payload: {payload}")
         logger.debug(f"response code = {r}")
