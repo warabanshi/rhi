@@ -2,6 +2,7 @@ import argparse
 import sys
 
 from rhi.commands.add import Add
+from rhi.commands.delete import Delete
 from rhi.commands.flush import Flush
 from rhi.commands.run import Run
 from rhi.commands.get import Get
@@ -21,6 +22,12 @@ def main():
 
     flush = subparsers.add_parser("flush", aliases=["f"], help="flush all commands")
     flush.set_defaults(command=Flush)
+
+    delete = subparsers.add_parser("delete", aliases=["d"], help="delete a specified command")
+    delete.add_argument(
+        "number", type=int, default=None, help="desired history number for deleting"
+    )
+    delete.set_defaults(command=Delete)
 
     run = subparsers.add_parser("run", aliases=["r"], help="run a specifiec command")
     run.add_argument(
