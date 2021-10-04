@@ -23,9 +23,9 @@ def main():
     flush = subparsers.add_parser("flush", aliases=["f"], help="flush all commands")
     flush.set_defaults(command=Flush)
 
-    delete = subparsers.add_parser("delete", aliases=["d"], help="delete a specified command")
+    delete = subparsers.add_parser("delete", aliases=["d"], help="delete specified commands")
     delete.add_argument(
-        "numbers", type=str, default=None, help="desired history numbers for deleting (CSV)"
+        "numbers", type=str, help="desired history numbers for deleting (CSV allowed)"
     )
     delete.set_defaults(command=Delete)
 

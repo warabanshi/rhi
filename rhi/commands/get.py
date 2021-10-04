@@ -1,6 +1,4 @@
-import json
-
-from typing import Any, Dict, List
+from typing import Dict, List
 
 from .command import Command
 
@@ -18,7 +16,6 @@ class Get(Command):
             output = self.get_all()
 
         print("\n".join(output))
-
 
     def parse_line(self, one_command: Dict[str, str]) -> str:
         if one_command["message"]:
@@ -39,7 +36,7 @@ class Get(Command):
         length = len(results)
         digits = len(str(length))
 
-        output: List[str] = [] 
+        output: List[str] = []
         for i in range(length):
             r = self.parse_line(results[i])
             output.append(f" {i+1:{digits}}: {r}")
