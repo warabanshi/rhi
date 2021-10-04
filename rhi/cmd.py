@@ -25,7 +25,7 @@ def main():
 
     delete = subparsers.add_parser("delete", aliases=["d"], help="delete a specified command")
     delete.add_argument(
-        "number", type=int, default=None, help="desired history number for deleting"
+        "numbers", type=str, default=None, help="desired history numbers for deleting (CSV)"
     )
     delete.set_defaults(command=Delete)
 
