@@ -21,7 +21,7 @@ class Add(Command):
                 self.command = self.cleanup_input(args.commands, args.num)
 
     def is_history(self, line):
-        return True if re.match(r'^ +[0-9]+', line) else False
+        return True if re.match(r"^ +[0-9]+", line) else False
 
     def cleanup_input(self, inputs: io.TextIOWrapper, rownum: int = None) -> str:
         lines = [line.rstrip("\n") for line in inputs.readlines()]
@@ -30,7 +30,9 @@ class Add(Command):
             raise Exception("There's no valid lines in input")
 
         if not self.is_history(lines[0]):
-            return "\n".join(lines)  # return whole input when it's not a result of history
+            return "\n".join(
+                lines
+            )  # return whole input when it's not a result of history
 
         def split_line(line: str) -> List[str]:
             s = line.strip()
