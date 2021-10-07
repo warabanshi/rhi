@@ -54,7 +54,7 @@ class Add(Command):
 
     def invoke(self) -> None:
         payload = {"command": self.command, "message": self.message}
-        r = self.call_post(operation="/add/", payload=payload)
+        r = self.call_post(operation="/add", payload=payload)
 
         msg = r.json().get("result")
         print(msg)

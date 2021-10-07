@@ -1,9 +1,11 @@
-from .command import Command
+from rhi.commands.command import Command
 
 
 class Delete(Command):
     def __init__(self, args):
-        self.numbers = [s.strip() for s in args.numbers.split(',') if s.strip().isdigit()]
+        self.numbers = [
+            s.strip() for s in args.numbers.split(",") if s.strip().isdigit()
+        ]
 
     def invoke(self) -> None:
         valid_numbers_csv: str = "#" + ", #".join(self.numbers)
