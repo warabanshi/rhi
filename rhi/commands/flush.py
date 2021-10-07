@@ -1,4 +1,4 @@
-from .command import Command
+from rhi.commands.command import Command
 
 
 class Flush(Command):

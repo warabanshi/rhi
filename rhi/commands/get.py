@@ -1,6 +1,6 @@
 from typing import Dict, List
 
-from .command import Command
+from rhi.commands.command import Command
 
 
 class Get(Command):

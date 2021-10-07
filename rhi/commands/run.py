@@ -1,6 +1,6 @@
 import subprocess
 
-from .command import Command
+from rhi.commands.command import Command
 
 
 class Run(Command):
