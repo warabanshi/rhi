@@ -18,10 +18,15 @@ class Get(Command):
         print("\n".join(output))
 
     def parse_line(self, one_command: Dict[str, str]) -> str:
+        r = f'{one_command["command"]}'
+
         if one_command["message"]:
-            return f'{one_command["command"]}   # {one_command["message"]}'
-        else:
-            return f'{one_command["command"]}'
+            r = f'{r}   # {one_command["message"]}'
+
+        if one_command["tags"]:
+            r = f'{r}  tags={one_command["tags"]}'
+
+        return r
 
     def get_single(self) -> List[str]:
         r = self.call_get(operation=f"/get/{self.num}")
