@@ -16,15 +16,15 @@ def test_get_all_output(mock_call_get, mock_get_init):
     res.encoding = 'utf-8'
     res._content = bytes(json.dumps({
         'result': [
-            {'command': 'ls -alh', 'message': ''},
-            {'command': 'cat /etc/SUSE-brand', 'message': 'opensuse version file'},
+            {'command': 'ls -alh', 'message': '', 'tags': ['python', 'bash']},
+            {'command': 'cat /etc/SUSE-brand', 'message': 'opensuse version file', 'tags': []},
         ]}), 'utf-8')
 
     mock_get_init.return_value = None
     mock_call_get.return_value = res
 
     expected = [
-        ' 1: ls -alh', 
+        " 1: ls -alh  tags=['python', 'bash']", 
         ' 2: cat /etc/SUSE-brand   # opensuse version file',
     ]
 
@@ -40,7 +40,7 @@ def test_get_single_output(mock_call_get, mock_get_init):
     res.status_code = 200
     res.encoding = 'utf-8'
     res._content = bytes(json.dumps({
-        'result': {'command': 'cat /etc/SUSE-brand', 'message': 'opensuse version file'}
+        'result': {'command': 'cat /etc/SUSE-brand', 'message': 'opensuse version file', 'tags': []}
     }), 'utf-8')
 
     mock_get_init.return_value = None

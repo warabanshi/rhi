@@ -55,8 +55,8 @@ class Add(Command):
 
     def cleanup_tags(self, tags: str) -> List[str]:
         try:
-            return tags.strip(' ,').split(',')
-        except:
+            return tags.strip(" ,").split(",")
+        except Exception:
             return []
 
     def invoke(self) -> None:
