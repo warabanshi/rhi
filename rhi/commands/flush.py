@@ -7,7 +7,7 @@ class Flush(Command):
 
         if yn.upper() == "Y":
             r = self.call_post(operation="/flush/")
-            msg = r.json().delete("result")
+            msg = r.json().get("result")
             print(msg)
         else:
             print("Flush cancelled")
