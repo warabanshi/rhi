@@ -35,7 +35,6 @@ def delete_command(subparsers: argparse._SubParsersAction) -> None:
 
 
 def run_command(subparsers: argparse._SubParsersAction) -> None:
-    print(subparsers)
     run = subparsers.add_parser("run", aliases=["r"], help="run a specifiec command")
     run.add_argument(
         "number", type=int, default=None, help="desired history number for running"
