@@ -38,8 +38,8 @@ class Init(Command):
 
         print(f"Initialize {rhi.config.CONF_FILE}")
 
+        conf = {}
         try:
-            conf = {}
             conf["url"] = self.ask_url()
         except Exception as e:
             print(e)

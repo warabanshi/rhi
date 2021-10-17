@@ -4,6 +4,7 @@ import logging
 import requests
 
 import rhi.config
+import rhi.exceptions
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -14,7 +15,12 @@ class Command:
         self.args = args
 
     def get_path(self, operation) -> str:
-        return rhi.config.CONF["url"].rstrip("/") + "/" + operation.lstrip("/")
+        try:
+            return rhi.config.CONF["url"].rstrip("/") + "/" + operation.lstrip("/")
+        except KeyError as e:
+            raise rhi.exceptions.RhiConfigException(
+                'Config "url" was not found. Please try to run "init" command.'
+            ) from e
 
     def call_get(self, operation="") -> requests.Response:
         path = self.get_path(operation)
