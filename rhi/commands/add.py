@@ -13,17 +13,18 @@ class Add(Command):
         super().__init__(args)
         self.command = None
         self.message = args.message
+        self.tags = self.cleanup_tags(args.tags)
 
         if args.commands:
             if sys.stdin.isatty():
                 raise Exception("stdin waits input")
             else:
-                self.command = self.cleanup_input(args.commands, args.num)
+                self.command = self.cleanup_commands(args.commands, args.num)
 
     def is_history(self, line):
         return True if re.match(r"^ +[0-9]+", line) else False
 
-    def cleanup_input(self, inputs: io.TextIOWrapper, rownum: int = None) -> str:
+    def cleanup_commands(self, inputs: io.TextIOWrapper, rownum: int = None) -> str:
         lines = [line.rstrip("\n") for line in inputs.readlines()]
 
         if len(lines) == 0:
@@ -52,8 +53,14 @@ class Add(Command):
 
         raise Exception(f"Invalid rownum is specified. rownum={rownum}")
 
+    def cleanup_tags(self, tags: str) -> List[str]:
+        try:
+            return tags.strip(' ,').split(',')
+        except:
+            return []
+
     def invoke(self) -> None:
-        payload = {"command": self.command, "message": self.message}
+        payload = {"command": self.command, "message": self.message, "tags": self.tags}
         r = self.call_post(operation="/add", payload=payload)
 
         msg = r.json().get("result")

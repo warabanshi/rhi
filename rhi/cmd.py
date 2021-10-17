@@ -16,6 +16,7 @@ def add_command(subparsers: argparse._SubParsersAction) -> None:
     )
     add.add_argument("--num", "-n", type=int, default=None, help="history number")
     add.add_argument("--message", "-m", type=str, default="", help="comment")
+    add.add_argument("--tags", "-t", type=str, default="", help="tags (CSV allowed)")
     add.set_defaults(command=Add)
 
 
