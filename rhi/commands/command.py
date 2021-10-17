@@ -3,6 +3,8 @@ import json
 import logging
 import requests
 
+from typing import Any, Dict
+
 import rhi.config
 import rhi.exceptions
 
@@ -22,9 +24,17 @@ class Command:
                 'Config "url" was not found. Please try to run "init" command.'
             ) from e
 
+    def get_headers(self) -> Dict[str, Any]:
+        headers = {
+            "content-type": "application/json",
+            "X-Rhi-Username": rhi.config.CONF['username'],
+        }
+
+        return headers
+
     def call_get(self, operation="") -> requests.Response:
         path = self.get_path(operation)
-        r = requests.get(path, headers=rhi.config.HEADERS)
+        r = requests.get(path, headers=self.get_headers())
 
         logger.debug(f"call {path}")
         logger.debug(f"response code = {r}")
@@ -35,7 +45,7 @@ class Command:
     def call_post(self, operation="", payload=None) -> requests.Response:
         path = self.get_path(operation)
 
-        r = requests.post(path, data=json.dumps(payload), headers=rhi.config.HEADERS)
+        r = requests.post(path, data=json.dumps(payload), headers=self.get_headers())
 
         logger.debug(f"send payload: {payload}")
         logger.debug(f"response code = {r}")
@@ -46,7 +56,7 @@ class Command:
     def call_delete(self, operation="", payload=None) -> requests.Response:
         path = self.get_path(operation)
 
-        r = requests.delete(path, data=json.dumps(payload), headers=rhi.config.HEADERS)
+        r = requests.delete(path, data=json.dumps(payload), headers=self.get_headers())
 
         logger.debug(f"send payload: {payload}")
         logger.debug(f"response code = {r}")
