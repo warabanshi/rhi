@@ -5,7 +5,7 @@ from typing import Any, Dict
 
 import validators
 
-import rhi.lib.helper
+import rhi.libs.helper
 import rhi.config
 
 from rhi.commands.command import Command
@@ -30,20 +30,20 @@ class Init(Command):
         return rhi_server
 
     def set_username(self) -> str:
-        username = input(f"Set your USERNAME >> ")
+        username = input("Set your USERNAME >> ")
 
         if len(username.strip()) < 3:
-            print('Username must have at least 3 letters')
+            print("Username must have at least 3 letters")
             username = self.set_username()
 
-        if not re.match(r'^[A-Za-z0-9@\._\-]{3,}$', username):
-            print('A specified username includes invalid letters')
+        if not re.match(r"^[A-Za-z0-9@\._\-]{3,}$", username):
+            print("A specified username includes invalid letters")
             username = self.set_username()
 
         return username
 
     def invoke(self) -> None:
-        if rhi.lib.helper.exists_conf_file():
+        if rhi.libs.helper.exists_conf_file():
             print(f"Config file {rhi.config.CONF_FILE} alraedy exists.")
             yn = input("Would you force initialize? (y/n) >> ")
 

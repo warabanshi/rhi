@@ -27,7 +27,7 @@ class Command:
     def get_headers(self) -> Dict[str, Any]:
         headers = {
             "content-type": "application/json",
-            "X-Rhi-Username": rhi.config.CONF['username'],
+            "X-Rhi-Username": rhi.config.CONF["username"],
         }
 
         return headers

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rhi"
-version = "0.0.2"
+version = "0.0.4"
 description = "rhi remote history command"
 authors = ["warabanshi <warabanshi@gmail.com>"]
 homepage = "https://github.com/warabanshi/"
