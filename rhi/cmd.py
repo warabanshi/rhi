@@ -7,6 +7,7 @@ from rhi.commands.flush import Flush
 from rhi.commands.init import Init
 from rhi.commands.run import Run
 from rhi.commands.get import Get
+from rhi.commands.version import Version
 
 
 def add_command(subparsers: argparse._SubParsersAction) -> None:
@@ -48,6 +49,11 @@ def init_command(subparsers: argparse._SubParsersAction) -> None:
     init.set_defaults(command=Init)
 
 
+def version_command(subparsers: argparse._SubParsersAction) -> None:
+    version = subparsers.add_parser("version", help="display rhi app version")
+    version.set_defaults(command=Version)
+
+
 def get_command(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "-n",
@@ -67,6 +73,7 @@ def main():
     delete_command(subparsers)
     run_command(subparsers)
     init_command(subparsers)
+    version_command(subparsers)
     get_command(parser)
 
     args: argparse.Namespace = parser.parse_args()
