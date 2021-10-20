@@ -10,7 +10,18 @@ Of course, to search hisotry I use `ctrl + r` also but it depends `history` of t
 
 ## Usage
 
-`rhi` takes a subcommand like `add`, `run`, `flush` (there's a alias for each subcommand). When any subcommand isn't specified then it's considered `get` command.
+`rhi` takes a subcommand like `init`, `add`, `delete`, `run`, `flush` (there's a alias for each subcommand). When any subcommand isn't specified then it's considered `get` command.
+
+### Init command
+
+Initialize your rhi configuration. Run this command so that initiate your environment. This command will create a file `~/.rhiconfig` for configurations
+
+```
+$ rhi init
+Where is rhi-server host? [http://localhost:45312/] >> 
+Set your USERNAME >> warabanshi
+
+```
 
 ### Add command
 
