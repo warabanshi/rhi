@@ -22,9 +22,7 @@ class Add(Command):
                 self.command = self.cleanup_commands(args.commands, args.num)
 
     def is_history(self, line):
-        print(line)
         return True if re.match(r"^ +[0-9]+ +history", line) else False
-        # return True if re.match(r"^ +[0-9]+", line) else False
 
     def cleanup_commands(self, inputs: io.TextIOWrapper, rownum: int = None) -> str:
         lines = [line.rstrip("\n") for line in inputs.readlines()]
@@ -41,11 +39,13 @@ class Add(Command):
             s = line.strip()
             return [s[: s.find(" ")].strip("* "), s[s.find(" ") + 1 :].strip()]
 
-        history_lines = [split_line(line) for line in lines]
+        history_lines = [
+            split_line(line) for line in lines if not self.is_history(line)
+        ]
         histories = {num: command for (num, command) in history_lines}
 
         if rownum is None:
-            return history_lines[max(len(lines) - 2, 0)][
+            return history_lines[-1][
                 1
             ]  # get a last line except "history" command itself
 
