@@ -113,7 +113,7 @@ def test_cleanup_commands_empty_row(mock_add_init):
 @patch('rhi.commands.add.Add.__init__')
 def test_is_history_true(mock_add_init):
     mock_add_init.return_value = None
-    expected = True
+    expected = False
 
     add = Add()
     result = add.is_history(line1)
